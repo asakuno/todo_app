@@ -1,0 +1,28 @@
+version: '3'
+services:
+  todo_app:
+    build:
+      dockerfile: ./docker/app/Dockerfile
+    volumes:
+      - .dockervenv:/server/.venv
+      - .:/server
+    ports:
+      - 8000:8000
+  
+  db:
+    build:
+      context: .
+      dockerfile: ./docker/db/Dockerfile
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - mysql-volume:/var/lib/mysql
+      
+volumes:
+  mysql-volume:
