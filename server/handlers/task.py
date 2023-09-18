@@ -1,4 +1,6 @@
 from fastapi import APIRouter
+from typing import List
+from server.models.task import TaskModel
 
 router = APIRouter()
 
@@ -7,9 +9,9 @@ def todos():
     return {"message": "hello!"}
 
 #index
-@router.get("/tasks")
+@router.get("/tasks", response_model=List[TaskModel])
 def get_tasks():
-    pass
+    return [TaskModel(id=1, title="1つ目のTODOタスク")]
 
 #create
 @router.post("/tasks")
