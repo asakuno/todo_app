@@ -1,8 +1,7 @@
 version: '3'
 services:
   todo_app:
-    build:
-      dockerfile: ./docker/app/Dockerfile
+    build: .
     volumes:
       - .dockervenv:/server/.venv
       - .:/server
