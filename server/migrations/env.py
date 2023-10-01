@@ -2,12 +2,17 @@ from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
+import os
+import sys
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+sys.path.append(os.path.dirname(current_dir))
+
+from settings.database import Base
 
 from alembic import context
-
-from settings.database import Base, DB_URL
 import models.task
-
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
@@ -43,11 +48,10 @@ def run_migrations_offline() -> None:
     """
     url = config.get_main_option("sqlalchemy.url")
     context.configure(
-        url=DB_URL,
+        url=url,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
-        compare_type=True,
     )
 
     with context.begin_transaction():
