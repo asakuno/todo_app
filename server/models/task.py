@@ -11,13 +11,18 @@ class Task(Base):
 
     id = Column(Integer, primary_key=True)
     title = Column(String(1024))
-
+    
+    done_id = Column(Integer, ForeignKey('done.id'))
     done = relationship("Done", back_populates="task", cascade="delete")
     
 class TaskModel(BaseModel):
     id: int
     title: Optional[str] = Field(None, example="買い物に行く")
-    done: bool = Field(False, description="完了フラグ")
+    done: bool = Field(False, description="完了")
+    
+    class Config:
+        orm_mode = True
+        from_attributes = True
 
 
 class Done(Base):

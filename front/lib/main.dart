@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:front/banana_counter.dart';
 import 'package:http/http.dart' as http;
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final textField = TextField();
+  MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -16,7 +18,7 @@ class MyApp extends StatelessWidget {
         ),
         home: Center(
           child: ElevatedButton(
-            child: const Text("push me and get greeting"),
+            child: const Text("押してね❤️"),
             onPressed: () async {
               //リクエスト先のurl
               Uri url = Uri.parse("http://127.0.0.1:8080/");
