@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from server.handlers import task, done
+from server.handlers import task
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
@@ -17,4 +17,3 @@ app.add_middleware(
 )
 
 app.include_router(task.router)
-app.include_router(done.router)

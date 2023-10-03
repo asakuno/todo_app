@@ -1,7 +1,7 @@
 from fastapi import Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 from sqlalchemy import select, func
-from server.models.task import Task, TaskModel, Done
+from server.models.task import Task, TaskModel
 
 class TaskRepository:
     # def __init__(
@@ -23,15 +23,15 @@ class TaskRepository:
         self,
         db: Session,
         title: str,
-        done: bool
-    ) -> Task:
+        done: bool,
+    ) -> TaskModel:
         task_orm = Task(
             title=title,
             done=done
         )
         db.add(task_orm)
         db.flush()
-        
+
         return TaskModel.from_orm(task_orm)
     
     def update_task(
