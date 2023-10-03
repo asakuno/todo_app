@@ -1,4 +1,5 @@
-from sqlalchemy import Column, Integer, String, ForeignKey
+import datetime
+from sqlalchemy import Column, BigInteger, String, ForeignKey, Boolean,DateTime
 from sqlalchemy.orm import relationship
 from typing import Optional
 from pydantic import BaseModel, Field
@@ -9,25 +10,24 @@ from  server.settings.database import Base
 class Task(Base):
     __tablename__ = "tasks"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(BigInteger(), primary_key=True, autoincrement=True)
     title = Column(String(1024))
-    
-    done_id = Column(Integer, ForeignKey('done.id'))
-    done = relationship("Done", back_populates="task", cascade="delete")
+    done = Column(Boolean, default=False)
+    created_at = Column(DateTime, nullable=False, default=datetime.datetime.now)
+    updated_at = Column(
+        DateTime,
+        nullable=False,
+        default=datetime.datetime.now,
+        onupdate=datetime.datetime.now,
+    )
     
 class TaskModel(BaseModel):
     id: int
-    title: Optional[str] = Field(None, example="買い物に行く")
-    done: bool = Field(False, description="完了")
+    title: str
+    done: bool
+    created_at: datetime.datetime
+    updated_at: datetime.datetime
     
     class Config:
         orm_mode = True
-        from_attributes = True
-
-
-class Done(Base):
-    __tablename__ = "dones"
-
-    id = Column(Integer, ForeignKey("tasks.id"), primary_key=True)
-
-    task = relationship("Task", back_populates="done")
+        from_attributes=True

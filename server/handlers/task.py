@@ -1,9 +1,9 @@
+#handlers/task.py
 from fastapi import APIRouter, Request, Depends, Response
 from typing import List, Annotated, Optional
 from server.models.task import TaskModel
 from server.libraries.repositories.task_repository import TaskRepository
 from pydantic import BaseModel
-from server.models.task import Done
 from server.settings.database import SessionLocal
 
 router = APIRouter()
@@ -32,10 +32,11 @@ def create_tasks(
     with SessionLocal.begin() as db:
         task = task_repo.create_task(
             db,
-            title=title,
-            done=done
+            title,
+            done
         )
-        return Response(data=task)
+        return {"data": task}
+
 
 #update
 @router.put("/tasks/{task_id}")
