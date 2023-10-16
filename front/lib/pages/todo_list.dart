@@ -39,7 +39,7 @@ class _TodoListState extends State<TodoList> {
                     // UserName
                     Row(
                       children: [
-                        Text(userList[index].id.toString() + ':'),
+                        Text('${userList[index].id.toString()}:'),
                         Text(userList[index].username),
                       ],
                     ),
@@ -49,7 +49,7 @@ class _TodoListState extends State<TodoList> {
                     Row(
                       // Email
                       children: [
-                        Text('Email:'),
+                        const Text('Email:'),
                         Text(userList[index].email),
                       ],
                     ),

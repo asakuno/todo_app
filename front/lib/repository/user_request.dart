@@ -16,9 +16,9 @@ class UserRequest {
 
     List<User> users = [];
 
-    userMap.forEach((user) {
+    for (var user in userMap) {
       users.add(User.fromJson(user));
-    });
+    }
 
     return users;
   }
