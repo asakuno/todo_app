@@ -1,6 +1,6 @@
 #handlers/task.py
-from fastapi import APIRouter, Request, Depends, Response
-from typing import List, Annotated, Optional
+from fastapi import APIRouter, Request, Depends
+from typing import List, Annotated, Optional, Any
 from server.models.task import TaskModel
 from server.libraries.repositories.task_repository import TaskRepository
 from pydantic import BaseModel
@@ -8,14 +8,20 @@ from server.settings.database import SessionLocal
 
 router = APIRouter()
 
+class Response(BaseModel):
+    data: Any
+    
+    class Config:
+        from_attributes=True
+
 @router.get("/")
 def todos():
     return {"message": "hello!"}
 
 #index
-@router.get("/tasks", response_model=List[TaskModel])
+@router.get("/tasks")
 def get_tasks(
-    task_repo = Annotated[TaskRepository, Depends(TaskRepository)],
+    task_repo: Annotated[TaskRepository, Depends(TaskRepository)]
 ):
     with SessionLocal.begin() as db:
         tasks = task_repo.get_tasks_all(db)
