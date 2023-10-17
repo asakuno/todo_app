@@ -15,6 +15,7 @@ class TaskRepository:
         tasks_orm = db.scalars((
             select(Task)
         )).all()
+        return [TaskModel.from_orm(task) for task in tasks_orm]
     
     def my_task():
         pass
@@ -45,8 +46,6 @@ class TaskRepository:
             select(Task)
             .where(task_id == task_id)
         )).one_or_none()
-        
-        task_orm.update(title=title, done=done)
         
         return TaskModel.from_orm(task_orm)
     

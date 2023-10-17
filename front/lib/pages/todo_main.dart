@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:front/pages/todo_list.dart';
 import 'package:front/pages/top.dart';
 
 class TodoMain extends StatefulWidget {
@@ -11,11 +12,11 @@ class TodoMain extends StatefulWidget {
 }
 
 class _TodoMainState extends State<TodoMain> {
-  var currentPage = const TopPage();
+  var currentPage = 'todo_top_page';
 
   void switchPage() {
     setState(() {
-      // 処理書く
+      currentPage = 'todo_list_page';
     });
   }
 
@@ -34,7 +35,9 @@ class _TodoMainState extends State<TodoMain> {
               end: Alignment.bottomRight
             )
           ),
-          child: currentPage,
+          child: currentPage == 'todo_top_page'
+              ? TopPage(switchPage)
+              : const TodoList(),
         ),
       ),
     );

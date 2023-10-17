@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TopPage extends StatelessWidget {
-  const TopPage({super.key});
+  const TopPage(this.enterTodo, {super.key});
+
+  final void Function() enterTodo;
 
   @override
   Widget build(context) {
@@ -34,7 +36,7 @@ class TopPage extends StatelessWidget {
           const SizedBox(height: 20),
           OutlinedButton.icon(
             onPressed: () {
-              //処理書く
+              enterTodo();
             },
             style: OutlinedButton.styleFrom(
               foregroundColor: Colors.white
