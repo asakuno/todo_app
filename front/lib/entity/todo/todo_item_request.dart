@@ -14,11 +14,11 @@ class TodoItemRequest with _$TodoItemRequest {
   factory TodoItemRequest.fromJson(Map<String, dynamic> json) => _$TodoItemRequestFromJson(json);
 }
 
-// @freezed
-// class TodoDataRequest with _$TodoDataRequest {
-//   const factory TodoDataRequest({
-//     required List<TodoItemRequest> data,
-//   }) = _TodoDataRequest;
+@freezed
+class TodoDataListRequest with _$TodoDataListRequest {
+  const factory TodoDataListRequest({
+    required List<TodoItemRequest> data,
+  }) = _TodoDataListRequest;
 
-//   factory TodoDataRequest.fromJson(Map<String, dynamic> json) => _$TodoDataRequestFromJson(json);
-// }
+  factory TodoDataListRequest.fromJson(Map<String, dynamic> json) => _$TodoDataListRequestFromJson(json);
+}

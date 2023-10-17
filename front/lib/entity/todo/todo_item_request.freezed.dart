@@ -186,3 +186,148 @@ abstract class _TodoItemRequest implements TodoItemRequest {
   _$$_TodoItemRequestCopyWith<_$_TodoItemRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+TodoDataListRequest _$TodoDataListRequestFromJson(Map<String, dynamic> json) {
+  return _TodoDataListRequest.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TodoDataListRequest {
+  List<TodoItemRequest> get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TodoDataListRequestCopyWith<TodoDataListRequest> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TodoDataListRequestCopyWith<$Res> {
+  factory $TodoDataListRequestCopyWith(
+          TodoDataListRequest value, $Res Function(TodoDataListRequest) then) =
+      _$TodoDataListRequestCopyWithImpl<$Res, TodoDataListRequest>;
+  @useResult
+  $Res call({List<TodoItemRequest> data});
+}
+
+/// @nodoc
+class _$TodoDataListRequestCopyWithImpl<$Res, $Val extends TodoDataListRequest>
+    implements $TodoDataListRequestCopyWith<$Res> {
+  _$TodoDataListRequestCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_value.copyWith(
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<TodoItemRequest>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_TodoDataListRequestCopyWith<$Res>
+    implements $TodoDataListRequestCopyWith<$Res> {
+  factory _$$_TodoDataListRequestCopyWith(_$_TodoDataListRequest value,
+          $Res Function(_$_TodoDataListRequest) then) =
+      __$$_TodoDataListRequestCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({List<TodoItemRequest> data});
+}
+
+/// @nodoc
+class __$$_TodoDataListRequestCopyWithImpl<$Res>
+    extends _$TodoDataListRequestCopyWithImpl<$Res, _$_TodoDataListRequest>
+    implements _$$_TodoDataListRequestCopyWith<$Res> {
+  __$$_TodoDataListRequestCopyWithImpl(_$_TodoDataListRequest _value,
+      $Res Function(_$_TodoDataListRequest) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? data = null,
+  }) {
+    return _then(_$_TodoDataListRequest(
+      data: null == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<TodoItemRequest>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_TodoDataListRequest implements _TodoDataListRequest {
+  const _$_TodoDataListRequest({required final List<TodoItemRequest> data})
+      : _data = data;
+
+  factory _$_TodoDataListRequest.fromJson(Map<String, dynamic> json) =>
+      _$$_TodoDataListRequestFromJson(json);
+
+  final List<TodoItemRequest> _data;
+  @override
+  List<TodoItemRequest> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
+
+  @override
+  String toString() {
+    return 'TodoDataListRequest(data: $data)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_TodoDataListRequest &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_TodoDataListRequestCopyWith<_$_TodoDataListRequest> get copyWith =>
+      __$$_TodoDataListRequestCopyWithImpl<_$_TodoDataListRequest>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TodoDataListRequestToJson(
+      this,
+    );
+  }
+}
+
+abstract class _TodoDataListRequest implements TodoDataListRequest {
+  const factory _TodoDataListRequest(
+      {required final List<TodoItemRequest> data}) = _$_TodoDataListRequest;
+
+  factory _TodoDataListRequest.fromJson(Map<String, dynamic> json) =
+      _$_TodoDataListRequest.fromJson;
+
+  @override
+  List<TodoItemRequest> get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$_TodoDataListRequestCopyWith<_$_TodoDataListRequest> get copyWith =>
+      throw _privateConstructorUsedError;
+}
