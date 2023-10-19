@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:front/entity/todo/todo_item_request.dart';
 import 'package:front/repository/todo_request.dart';
+import 'package:front/pages/todo_create.dart';
 
 class TodoList extends StatefulWidget {
   const TodoList({super.key});
@@ -13,12 +14,21 @@ class TodoList extends StatefulWidget {
 
 class _TodoListState extends State<TodoList> {
   late Future<List<TodoItemRequest>> _todoListFuture;
+  var currentPage = 'todo_list_view';
 
   @override
   void initState() {
     super.initState();
     _todoListFuture = _fetchTodoList(); // 修正: _fetchTodoListメソッドを呼び出す
   }
+
+  void _navigateToTodoCreate(BuildContext context) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const TodoCreate()),
+  );
+}
+
 
   Future<List<TodoItemRequest>> _fetchTodoList() async {
     try {
@@ -35,7 +45,19 @@ class _TodoListState extends State<TodoList> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Center(
+      child: Scaffold(
+      appBar: AppBar(
+      title: const Text('Todo List'),
+      actions: [
+        ElevatedButton(
+          onPressed: () {
+            _navigateToTodoCreate(context);
+          },
+          child: const Text('create'),
+        ),
+      ],
+    ),
       body: FutureBuilder<List<TodoItemRequest>>(
         // FutureBuilderは非同期操作が完了するまで待ちます
         future: _todoListFuture,
@@ -55,6 +77,7 @@ class _TodoListState extends State<TodoList> {
                 return Card(
                   shadowColor: Colors.black,
                   child: Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       const SizedBox(
                         height: 10,
@@ -87,6 +110,6 @@ class _TodoListState extends State<TodoList> {
           }
         },
       ),
-    );
+    ));
   }
 }
