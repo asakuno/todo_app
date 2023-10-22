@@ -20,6 +20,20 @@ Map<String, dynamic> _$$_TodoItemRequestToJson(_$_TodoItemRequest instance) =>
       'done': instance.done,
     };
 
+_$_TodoItemRequestData _$$_TodoItemRequestDataFromJson(
+        Map<String, dynamic> json) =>
+    _$_TodoItemRequestData(
+      title: json['title'] as String,
+      done: json['done'] as bool? ?? false,
+    );
+
+Map<String, dynamic> _$$_TodoItemRequestDataToJson(
+        _$_TodoItemRequestData instance) =>
+    <String, dynamic>{
+      'title': instance.title,
+      'done': instance.done,
+    };
+
 _$_TodoDataListRequest _$$_TodoDataListRequestFromJson(
         Map<String, dynamic> json) =>
     _$_TodoDataListRequest(

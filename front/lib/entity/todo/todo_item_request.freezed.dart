@@ -187,6 +187,161 @@ abstract class _TodoItemRequest implements TodoItemRequest {
       throw _privateConstructorUsedError;
 }
 
+TodoItemRequestData _$TodoItemRequestDataFromJson(Map<String, dynamic> json) {
+  return _TodoItemRequestData.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TodoItemRequestData {
+  String get title => throw _privateConstructorUsedError;
+  bool get done => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TodoItemRequestDataCopyWith<TodoItemRequestData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TodoItemRequestDataCopyWith<$Res> {
+  factory $TodoItemRequestDataCopyWith(
+          TodoItemRequestData value, $Res Function(TodoItemRequestData) then) =
+      _$TodoItemRequestDataCopyWithImpl<$Res, TodoItemRequestData>;
+  @useResult
+  $Res call({String title, bool done});
+}
+
+/// @nodoc
+class _$TodoItemRequestDataCopyWithImpl<$Res, $Val extends TodoItemRequestData>
+    implements $TodoItemRequestDataCopyWith<$Res> {
+  _$TodoItemRequestDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = null,
+    Object? done = null,
+  }) {
+    return _then(_value.copyWith(
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      done: null == done
+          ? _value.done
+          : done // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_TodoItemRequestDataCopyWith<$Res>
+    implements $TodoItemRequestDataCopyWith<$Res> {
+  factory _$$_TodoItemRequestDataCopyWith(_$_TodoItemRequestData value,
+          $Res Function(_$_TodoItemRequestData) then) =
+      __$$_TodoItemRequestDataCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String title, bool done});
+}
+
+/// @nodoc
+class __$$_TodoItemRequestDataCopyWithImpl<$Res>
+    extends _$TodoItemRequestDataCopyWithImpl<$Res, _$_TodoItemRequestData>
+    implements _$$_TodoItemRequestDataCopyWith<$Res> {
+  __$$_TodoItemRequestDataCopyWithImpl(_$_TodoItemRequestData _value,
+      $Res Function(_$_TodoItemRequestData) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? title = null,
+    Object? done = null,
+  }) {
+    return _then(_$_TodoItemRequestData(
+      title: null == title
+          ? _value.title
+          : title // ignore: cast_nullable_to_non_nullable
+              as String,
+      done: null == done
+          ? _value.done
+          : done // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_TodoItemRequestData implements _TodoItemRequestData {
+  const _$_TodoItemRequestData({required this.title, this.done = false});
+
+  factory _$_TodoItemRequestData.fromJson(Map<String, dynamic> json) =>
+      _$$_TodoItemRequestDataFromJson(json);
+
+  @override
+  final String title;
+  @override
+  @JsonKey()
+  final bool done;
+
+  @override
+  String toString() {
+    return 'TodoItemRequestData(title: $title, done: $done)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_TodoItemRequestData &&
+            (identical(other.title, title) || other.title == title) &&
+            (identical(other.done, done) || other.done == done));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, title, done);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_TodoItemRequestDataCopyWith<_$_TodoItemRequestData> get copyWith =>
+      __$$_TodoItemRequestDataCopyWithImpl<_$_TodoItemRequestData>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TodoItemRequestDataToJson(
+      this,
+    );
+  }
+}
+
+abstract class _TodoItemRequestData implements TodoItemRequestData {
+  const factory _TodoItemRequestData(
+      {required final String title, final bool done}) = _$_TodoItemRequestData;
+
+  factory _TodoItemRequestData.fromJson(Map<String, dynamic> json) =
+      _$_TodoItemRequestData.fromJson;
+
+  @override
+  String get title;
+  @override
+  bool get done;
+  @override
+  @JsonKey(ignore: true)
+  _$$_TodoItemRequestDataCopyWith<_$_TodoItemRequestData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 TodoDataListRequest _$TodoDataListRequestFromJson(Map<String, dynamic> json) {
   return _TodoDataListRequest.fromJson(json);
 }

@@ -5,8 +5,12 @@ from server.models.task import TaskModel
 from server.libraries.repositories.task_repository import TaskRepository
 from pydantic import BaseModel
 from server.settings.database import SessionLocal
+import logging
 
 router = APIRouter()
+class TodoItemRequest(BaseModel):
+    title: str
+    done: bool
 
 class Response(BaseModel):
     data: Any
@@ -31,17 +35,16 @@ def get_tasks(
 #create
 @router.post("/tasks")
 def create_tasks(
-    title: str,
-    done: bool,
+    todo_item: TodoItemRequest,
     task_repo: Annotated[TaskRepository, Depends(TaskRepository)],
 ):
     with SessionLocal.begin() as db:
         task = task_repo.create_task(
             db,
-            title,
-            done
+            todo_item.title,
+            todo_item.done
         )
-        return {"data": task}
+        return {"message": "作成しました"}
 
 
 #update
