@@ -23,4 +23,21 @@ class TodoRequest{
       rethrow;
     }
   }
+
+  Future<void> postTodoData(TodoItemRequest body) async {
+    final bodyJsonUtf8 = json.encode(body);
+    print(bodyJsonUtf8);
+
+    try {
+      final response = await http.post(url, body: bodyJsonUtf8);
+      
+      if (response.statusCode >= 400) {
+        print('Todoを新規登録できませんでした');
+      } else {
+        print('Todoを新規登録しました');
+      }
+    } on Exception {
+      rethrow;
+    }
+  }
 }

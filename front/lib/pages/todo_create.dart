@@ -31,8 +31,10 @@ class _TodoCreateState extends State<TodoCreate> {
               height: 10,
             ),
             TextButton(
-              child: Text('新規登録'),
-              onPressed: () {},
+              child: const Text('登録'),
+              onPressed: () {
+                
+              },
             )
           ]),
         )));
