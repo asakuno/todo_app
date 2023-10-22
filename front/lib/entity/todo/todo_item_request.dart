@@ -15,6 +15,16 @@ class TodoItemRequest with _$TodoItemRequest {
 }
 
 @freezed
+class TodoItemRequestData with _$TodoItemRequestData {
+  const factory TodoItemRequestData({
+    required String title,
+    @Default(false) bool done,
+  }) = _TodoItemRequestData;
+
+  factory TodoItemRequestData.fromJson(Map<String, dynamic> json) => _$TodoItemRequestDataFromJson(json);
+}
+
+@freezed
 class TodoDataListRequest with _$TodoDataListRequest {
   const factory TodoDataListRequest({
     required List<TodoItemRequest> data,

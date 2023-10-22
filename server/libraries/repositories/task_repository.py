@@ -25,15 +25,13 @@ class TaskRepository:
         db: Session,
         title: str,
         done: bool,
-    ) -> TaskModel:
+    ):
         task_orm = Task(
             title=title,
             done=done
         )
         db.add(task_orm)
         db.flush()
-
-        return TaskModel.from_orm(task_orm)
     
     def update_task(
         self,
