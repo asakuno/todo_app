@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:front/repository/todo_request.dart';
+import 'package:front/pages/todo_list.dart';
 import '../entity/todo/todo_item_request.dart';
 
 class TodoCreate extends StatefulWidget {
@@ -13,6 +14,22 @@ class TodoCreate extends StatefulWidget {
 
 class _TodoCreateState extends State<TodoCreate> {
   final TextEditingController _titleController = TextEditingController(); // 新しいコントローラを追加
+
+  void _registerTodo() {
+    final String title = _titleController.text;
+    if (title.isNotEmpty) {
+      final TodoItemRequestData todoItemRequestData = TodoItemRequestData(title: title);
+      TodoRequest().postTodoData(todoItemRequestData).then((_) {
+        _titleController.clear();
+        // Todoの登録が成功したらTodoList画面に遷移する
+        Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const TodoList()));
+      }).catchError((error) {
+        print('エラー: $error');
+      });
+    } else {
+      print('タイトルを入力してください');
+    }
+  }
 
   @override
   Widget build(context) {
@@ -37,23 +54,7 @@ class _TodoCreateState extends State<TodoCreate> {
               ),
               TextButton(
                 child: const Text('登録'),
-                onPressed: () {
-                  // 登録ボタンが押されたときの処理
-                  final String title = _titleController.text;
-                  if (title.isNotEmpty) {
-                    // TodoItemRequestオブジェクトを作成
-                    final TodoItemRequestData todoItemRequestData = TodoItemRequestData(title: title);
-                    print(todoItemRequestData);
-                    // TodoRequestクラスのpostTodoDataメソッドを呼び出してデータをPOST
-                    TodoRequest().postTodoData(todoItemRequestData).then((_) {
-                      _titleController.clear();
-                    }).catchError((error) {
-                      print('エラー: $error');
-                    });
-                  } else {
-                    print('タイトルを入力してください');
-                  }
-                },
+                onPressed: _registerTodo,
               )
             ],
           ),
