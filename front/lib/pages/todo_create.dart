@@ -42,15 +42,12 @@ class _TodoCreateState extends State<TodoCreate> {
                   final String title = _titleController.text;
                   if (title.isNotEmpty) {
                     // TodoItemRequestオブジェクトを作成
-                    print("処理されています");
-                    final TodoItemRequestData todoItemRequestData = TodoItemRequestData(title: title, done: false);
+                    final TodoItemRequestData todoItemRequestData = TodoItemRequestData(title: title);
                     print(todoItemRequestData);
                     // TodoRequestクラスのpostTodoDataメソッドを呼び出してデータをPOST
                     TodoRequest().postTodoData(todoItemRequestData).then((_) {
-                      print("処理されています2");
                       _titleController.clear();
                     }).catchError((error) {
-                      // エラーハンドリングを行うこともできます
                       print('エラー: $error');
                     });
                   } else {

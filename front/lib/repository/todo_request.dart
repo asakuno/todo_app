@@ -1,9 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import '../entity/todo/todo_item_request.dart';
+import 'package:front/utility/toast.dart';
 
 class TodoRequest{
   Uri url = Uri.parse('http://127.0.0.1:8080/tasks');
+  UtilityToast _toast = UtilityToast();
 
   Future<TodoDataListRequest> getTodo() async {
     try {
@@ -35,38 +37,14 @@ class TodoRequest{
       }, body: bodyJsonUtf8);
       
       if (response.statusCode >= 400) {
+        _toast.showErrorToast("Todoを作成できませんでした");
         print('Todoを新規登録できませんでした');
       } else {
+        _toast.showSuccessToast('Todoを作成しました');
         print('Todoを新規登録しました');
       }
     } on Exception {
       rethrow;
     }
-  }
-
-  Future<void> createTodoData(TodoItemRequestData body) async {
-  Map<String, dynamic> requestBody = {
-    "title": "test",
-    "done": false
-  };
-  
-  try {
-    final response = await http.post(
-      url,
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode(requestBody),
-    );
-    
-    if (response.statusCode == 200) {
-      print('Todoを新規登録しました');
-    } else {
-      print('Todoを新規登録できませんでした: ${response.statusCode}');
-      print(response.body);
-    }
-  } catch (error) {
-    print('エラー: $error');
-  }
   }
 }
