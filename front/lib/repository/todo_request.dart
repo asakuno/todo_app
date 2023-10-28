@@ -5,7 +5,7 @@ import 'package:front/utility/toast.dart';
 
 class TodoRequest{
   Uri url = Uri.parse('http://127.0.0.1:8080/tasks');
-  UtilityToast _toast = UtilityToast();
+  final UtilityToast _toast = UtilityToast();
 
   Future<TodoDataListRequest> getTodo() async {
     try {
