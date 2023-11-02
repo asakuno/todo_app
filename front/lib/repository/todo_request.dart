@@ -38,10 +38,10 @@ class TodoRequest{
       
       if (response.statusCode >= 400) {
         _toast.showErrorToast("Todoを作成できませんでした");
-        print('Todoを新規登録できませんでした');
+        //print('Todoを新規登録できませんでした');
       } else {
         _toast.showSuccessToast('Todoを作成しました');
-        print('Todoを新規登録しました');
+        //print('Todoを新規登録しました');
       }
     } on Exception {
       rethrow;
