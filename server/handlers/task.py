@@ -11,6 +11,9 @@ router = APIRouter()
 class TodoItemRequest(BaseModel):
     title: str
     done: bool
+    
+class TodoUpdateDoneRequest(BaseModel):
+    done: bool
 
 class Response(BaseModel):
     data: Any
@@ -50,29 +53,34 @@ def create_tasks(
 #update
 @router.put("/tasks/{task_id}")
 def update_task(
-    task_id: int,
-    title: str,
-    done: bool,
-    task_repo: Annotated[TaskRepository, Depends(TaskRepository)],
+    request: Request,
+    done_request: TodoUpdateDoneRequest,
+    task_repo: Annotated[TaskRepository, Depends(TaskRepository)]
     ):
+    print(request.__dict__)
+    task_id = int(request.path_params['task_id'])
+    print(done_request.done)
     with SessionLocal.begin() as db:
         task = task_repo.update_task(
             db,
             task_id,
-            title,
-            done
+            done_request.done
         )
         return Response(data=task)
 
 #delete
 @router.delete("/tasks/{task_id}")
-def delete_task(
-    task_id: int,
-    task_repo = Annotated[TaskRepository, Depends(TaskRepository)],
-    ):
+def delete_task_by_id(
+    request: Request,
+    task_repo: Annotated[TaskRepository, Depends(TaskRepository)]
+):
+    print(request.__dict__)
+    print((int(request.path_params['task_id'])))
+    task_id = int(request.path_params['task_id'])
+    print(type(task_id))
     with SessionLocal.begin() as db:
         task = task_repo.delete_task(
             db,
             task_id
         )
-        return Response(data=task)
+        return {"message": "削除しました"}
