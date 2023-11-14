@@ -1,6 +1,6 @@
 from fastapi import Depends, HTTPException, Request
 from sqlalchemy.orm import Session
-from sqlalchemy import select, func
+from sqlalchemy import select, func, delete
 from server.models.task import Task, TaskModel
 
 class TaskRepository:
@@ -37,13 +37,17 @@ class TaskRepository:
         self,
         db: Session,
         task_id: int,
-        title: str,
         done: bool,
     ) -> Task:
         task_orm = db.scalar((
             select(Task)
-            .where(task_id == task_id)
-        )).one_or_none()
+            .where(Task.id == task_id)
+        ))
+        
+        task_orm.done = done
+        
+        db.add(task_orm)
+        db.flush()
         
         return TaskModel.from_orm(task_orm)
     
@@ -51,12 +55,9 @@ class TaskRepository:
         self,
         db: Session,
         task_id: int,
-    ) -> Task:
-        task_orm = db.scalars((
-            select(Task)
-            .where(task_id == task_id) 
-        )).one_or_none()
-        
-        task_orm.delete()
-        
+    ):
+        delete_statement = delete(Task).where(Task.id == task_id)
+
+        db.execute(delete_statement)
+
         return {"result": "delete success"}
